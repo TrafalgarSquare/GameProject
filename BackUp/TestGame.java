@@ -50,7 +50,6 @@ public class TestGame extends JPanel implements ActionListener,Runnable,KeyListe
 					Bullet n = (Bullet) bullets.get(i);
 					if(n.isVisible()==true){
 					n.move();
-					n.collision(ast.getX(), ast.getY());
 					
 //					n.collision(ast.getX(), ast.getY());
 //					ast.bulletCollision(n.getX(), n.getY());
@@ -66,16 +65,13 @@ public class TestGame extends JPanel implements ActionListener,Runnable,KeyListe
 //					Asteroid aster = (Asteroid)asteroids.get(i);
 //					if(aster.isDestroyed()==false){
 //						aster.move();
-//						System.out.println("a");
-//				
 //						aster.playerCollision(player.getX(),player.getY());
 //					}
 //					else{
-//						System.out.println("b");
 //						asteroids.remove(i);
 //					}
-//                }
-                
+//				}
+//                
                 
                 	player.collision(ast.getX(),ast.getY());
                 	
@@ -92,7 +88,8 @@ public class TestGame extends JPanel implements ActionListener,Runnable,KeyListe
 	 
 	             
 	                g2d.drawImage(player.getImage(), player.getX(), player.getY(), null);
-	             
+	                if(ast.isDestroyed()==false)
+	                g2d.drawImage(ast.getImage(),ast.getX(), ast.getY(),null);
 	              
 	        
 	                ArrayList bullets = Player.getBullets();
@@ -100,13 +97,12 @@ public class TestGame extends JPanel implements ActionListener,Runnable,KeyListe
 						Bullet n = (Bullet) bullets.get(i);
 						g2d.drawImage(n.getImage(),n.getX(),n.getY(),null);
 					}
-//	                ArrayList asteroids = Asteroid.getAsteroids();
-//	                for (int i = 0; i < asteroids.size(); i++) {
-//						Asteroid aster = (Asteroid)asteroids.get(i);
-//						g2d.drawImage(aster.getImage(),aster.getX(),aster.getY(),null);
-//						
-//						}
-	                g2d.drawImage(ast.getImage(), ast.getX(),ast.getY(),null);
+	                ArrayList asteroids = Asteroid.getAsteroids();
+	                for (int i = 0; i < asteroids.size(); i++) {
+						Asteroid aster = (Asteroid)asteroids.get(i);
+						g2d.drawImage(aster.getImage(),aster.getX(),aster.getY(),null);
+						}
+	                
 	                g2d.setFont(font);
 	                g2d.setColor(Color.BLUE);
 	                g2d.drawString("Player health:"+player.hp+"/"+player.maxHp, 0, 15);
